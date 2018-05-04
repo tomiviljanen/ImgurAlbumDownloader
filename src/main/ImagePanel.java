@@ -15,7 +15,6 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 class ImagePanel {
@@ -36,7 +35,8 @@ class ImagePanel {
         stage.widthProperty().addListener((obs, oldVal, newVal) -> images.forEach(e -> e.view.setFitWidth(newVal.intValue() - 40)));
 
         JsonArray jsonArray = ImgurHelper.crawl(urlToCrawl);
-        for(int i = 0; i< Objects.requireNonNull(jsonArray).size(); i++){
+        int size = jsonArray != null ? jsonArray.size() : 0;
+        for(int i = 0; i< size; i++){
             SelectableImage image = new SelectableImage(jsonArray.getJsonObject(i));
             images.add(image);
             content.getChildren().add(image);
@@ -44,8 +44,7 @@ class ImagePanel {
         Button download = new Button("Download");
         download.setOnAction(e -> {
             List<String> links = images.stream().filter(image -> image.isSelected).map(image -> image.link).collect(Collectors.toList());
-            ProgressWindow progress = new ProgressWindow(links, dir);
-            progress.start();
+            Frame.download(links, dir);
         });
         download.setDefaultButton(true);
         download.setMaxWidth(Double.MAX_VALUE);
@@ -63,7 +62,7 @@ class ImagePanel {
        SelectableImage(JsonObject obj){
            super();
            link = obj.getString("link");
-           view = new ImageView( new Image(obj.getBoolean("animated") ? link : link + "s"));
+           view = new ImageView(new Image(obj.getBoolean("animated") ? link : link + "s"));
            view.setFitWidth(WIDTH - 15);
            view.setPreserveRatio(true);
            setStyle("-fx-border-width: 3; -fx-border-color: green");

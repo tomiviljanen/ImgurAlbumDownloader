@@ -1,0 +1,46 @@
+.root{
+    -fx-background-color: white;
+}
+
+.text-field, .text-area{
+    -fx-background-color: -fx-text-box-border, -fx-background;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0;
+}
+.text-field:focused, .text-area:focused{
+    -fx-background-color: -fx-focus-color, -fx-background;
+}
+
+.button{
+    -fx-background-radius: 0px;
+    -fx-background-insets: 0, 1;
+    -fx-background-color: -fx-text-box-border, -fx-background;
+}
+
+.button:hover{
+    -fx-cursor: hand;
+    -fx-background-color: -fx-focus-color, -fx-background;
+}
+
+.list-view{
+    -fx-background-color: -fx-text-box-border, -fx-background;
+}
+.list-view:focused {
+    -fx-background-color: -fx-focus-color, -fx-background;
+}
+
+.combo-box{
+    -fx-background-radius: 0px;
+    -fx-background-insets: 0, 1;
+    -fx-background-color: -fx-text-box-border, -fx-background;
+}
+
+.combo-box:focused{
+    -fx-background-color: -fx-focus-color, -fx-background;
+}
+
+.tab-pane{
+    -fx-background-color: -fx-text-box-border, -fx-background;
+    -fx-background-radius: 0px;
+    -fx-background-insets: 0, 0 0 1 0;
+}

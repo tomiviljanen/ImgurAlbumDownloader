@@ -31,7 +31,7 @@ class ImgurHelper extends Task<Void>{
     protected Void call(){
         int maxSize = links.size();
         updateMessage("Progress 0/" + maxSize);
-        for (int i = 0; i < links.size(); i++) {
+        for (int i = 0; i < maxSize; i++) {
             String link = links.get(i);
             try {
                 FileUtils.copyURLToFile(new URL(link), new File(dir + "\\" + FilenameUtils.getName(link)));
